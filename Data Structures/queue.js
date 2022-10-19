@@ -1,58 +1,67 @@
 // program to implement queue data structure
-
 class Queue {
   constructor() {
-    this.items = [];
+    this.elements = {};
+    this.head = 0;
+    this.tail = 0;
   }
 
-  // add element to the queue
+  // enqueue method
   enqueue(element) {
-    return this.items.push(element);
+    // sets the tail to be equal to the new element that is added to the queue
+    this.elements[this.tail] = element;
+    // increments the tail
+    this.tail++;
   }
 
-  // remove element from the queue
+  // dequeue method
   dequeue() {
-    if (this.items.length > 0) {
-      return this.items.shift();
-    }
+    // select the item at the front of the back
+    const item = this.elements[this.head];
+    // remove the item at the front of the queue
+    delete this.elements[this.head];
+    // increment the head value as it is moving up the queue's index
+    this.head++;
+    // return the item that was removed from the front of the queue
+    return item;
   }
 
-  // view the last element
+  // peek method
   peek() {
-    return this.items[this.items.length - 1];
+    // select and return the element at the front of the queue (head)
+    return this.elements[this.head];
   }
 
-  // check if the queue is empty
-  isEmpty() {
-    return this.items.length == 0;
+  // length method
+  get length() {
+    // return the length of the queue
+    return this.tail - this.head;
   }
 
-  // the size of the queue
-  size() {
-    return this.items.length;
-  }
-
-  // empty the queue
-  clear() {
-    this.items = [];
+  // empty method
+  get isEmpty() {
+    return this.length === 0;
   }
 }
 
-let queue = new Queue();
-queue.enqueue(1);
-queue.enqueue(2);
-queue.enqueue(4);
-queue.enqueue(8);
-console.log(queue.items);
+// create an instance of a queue
+let q = new Queue();
 
-queue.dequeue();
-console.log(queue.items);
+// enqueue elements from 1 - 7
+for (let i = 1; i <= 7; i++) {
+  q.enqueue(i);
+}
 
-console.log(queue.peek());
+// get the number at the front of the queue
+console.log(q.peek());
 
-console.log(queue.isEmpty());
+// get the current length of the queue
+console.log(q.length);
 
-console.log(queue.size());
+// remove the element at the front of the queue
+console.log(q.dequeue());
 
-queue.clear();
-console.log(queue.items);
+// remove all the elements
+while (!q.isEmpty()) {
+  console.log(q.dequeue());
+}
