@@ -40,14 +40,19 @@ function identifyReoccur(arr) {
     map[arr[i]] = 0;
   }
 
+  // iterate through array, check if an element appears
+  // in the hashmap/object, IF so, increment the object
+  // value by 1
   for (let i = 0; i < arr.length; i++) {
-    for (let [key, value] of Object.entries(map)) {
+    for (let [key] of Object.entries(map)) {
       if (arr[i] == key) {
         map[key]++;
       }
     }
   }
 
+  // iterate through the object values and check for the
+  // first one that has a value of 1, return corresponding key
   for ([key, value] of Object.entries(map)) {
     if (value > 1) {
       console.log(key, value);
@@ -56,4 +61,5 @@ function identifyReoccur(arr) {
   }
 }
 
+// execute function with array
 identifyReoccur(["c", "d", "d", "a", "z", "a", "z"]);
