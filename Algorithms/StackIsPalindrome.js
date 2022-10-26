@@ -63,8 +63,27 @@ function isPalindrome(str) {
   }
 }
 
-// should return true
-isPalindrome("nan");
+var romanToInt = function(s) {
+    
+  let total = 0;
+  
+  const sym = { 
+      'I': 1,
+      'V': 5,
+      'X': 10,
+      'L': 50,
+      'C': 100,
+      'D': 500,
+      'M': 1000
+  }
+  
+  // iterate through the inputted string
+  for(let i = 0; i < s.length; i++){
+    console.log(sym[s[i]])
+      total += sym[s[i]];
+  }
+  console.log(total);
+  return parseInt(total);
+};
 
-// should return false
-isPalindrome("dog");
+romanToInt("III");

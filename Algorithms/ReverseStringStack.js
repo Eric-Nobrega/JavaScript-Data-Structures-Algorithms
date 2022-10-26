@@ -1,8 +1,8 @@
 // Stack class
 class Stack {
   // Array is used to implement stack
-  constructor(items = []) {
-    this.items = items;
+  constructor() {
+    this.items = [];
   }
 
   // Functions to be implemented
@@ -34,26 +34,26 @@ class Stack {
     // return true if stack is empty
     return this.items.length == 0;
   }
-
-  // printStack function
-  printStack() {
-    var str = "";
-    for (var i = 0; i < this.items.length; i++) str += this.items[i] + " ";
-    return str;
-  }
 }
 
-let stack = new Stack();
-stack.push(78);
-stack.pop();
-stack.push(44);
-stack.push(12);
-stack.push(18);
-stack.pop();
-stack.push(19);
-stack.pop();
-stack.pop();
-stack.push(12);
-stack.push(28);
+// reverse logic
+function reverseString(str) {
+  // create a stack of characters
+  let stack = new Stack();
+  let reversedStack = new Stack();
+  // push all characters of string to stack
+  for (let i = 0; i < str.length; i++) {
+    stack.push(str[i]);
+  }
 
-console.log(stack.printStack());
+  // pop all characters of string and
+  // put them back to str
+  while (!stack.isEmpty()) {
+    reversedStack.push(stack.pop());
+  }
+
+  console.log(reversedStack.items);
+}
+
+let str = "Hello World";
+reverseString(str);
