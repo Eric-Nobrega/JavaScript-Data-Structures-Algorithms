@@ -58,40 +58,86 @@ class LinkedList {
     // increment the length value
     this.length++;
 
-    return this;
+    // return this;
   }
 
   // prepend method
   prepend(value) {
-    const oldHead = this.head;
-
     const newNode = {
       value: value,
-      next: oldHead,
+      next: null,
     };
-
+    newNode.next = this.head;
     this.head = newNode;
-
     this.length++;
+    return this;
   }
 
   // traverse method
   traverse() {
+    let arr = [];
     let currentNode = this.head;
     // use a while loop, as we will not know the length of the LLDS
-    while (currentNode.next != null) {
-      console.log(currentNode.value);
+    while (currentNode != null) {
+      arr.push(currentNode.value);
       currentNode = currentNode.next;
     }
-    console.log(this.tail.value);
+    console.log(arr);
+  }
+
+  // insert method
+  insert(index, value) {
+    // check the paramaters, error handling
+    if (value >= this.length) {
+      return this.append(value);
+    }
+
+    const newNode = {
+      value: value,
+      next: null,
+    };
+
+    // leader node is the node previous to the index we
+    // want to insert to, therefore we subract 1 from the
+    // index paramter
+    const leaderNode = this.traverseToIndex(index - 1);
+    const holdingPointer = leader.next;
+
+    // insert the new node into the LLDS
+    leaderNode.next = newNode;
+    newNode.next = holdingPointer;
+    this.length++;
+  }
+  // traverse to index method
+  traverseToIndex(index) {
+    // check params
+    let counter = 0;
+    let currentNode = this.head;
+    while (counter != index) {
+      currentNode = currentNode.next;
+      counter++;
+    }
+    return currentNode;
+  }
+
+  // remove method
+  remove(index) {
+    //check params
+    //remove the pointer that points towards the deleted node
+    //update it with the node infront of the deleted node
+    const leaderNode = this.traverseToIndex(index - 1);
+    const holdingPointer = leaderNode.next.next;
+
+    leaderNode.next = holdingPointer;
+    this.length--;
   }
 }
 // linked list = [10, 5, 16]
-const myLinkedList = new LinkedList(10);
+let myLinkedList = new LinkedList(10);
 myLinkedList.append(5);
 myLinkedList.append(16);
 myLinkedList.prepend(1);
-
 // linked list = [1, 10, 5, 16]
-
+myLinkedList.remove(1);
+// linked list = [1, 5, 16]
 myLinkedList.traverse();
