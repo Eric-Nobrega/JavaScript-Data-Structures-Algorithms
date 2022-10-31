@@ -1,59 +1,41 @@
-// Stack class
+// implemented using an array
+
 class Stack {
-  // Array is used to implement stack
-  constructor(items = []) {
-    this.items = items;
+  // constructor method
+  constructor() {
+    this.objects = [];
   }
 
-  // Functions to be implemented
-
-  // push function
-  push(element) {
-    // push element into the items
-    this.items.push(element);
+  // lookup method
+  lookup(value) {
+    for (let i = 0; i < this.objects.length; i++) {
+      if (this.objects[i] == value) {
+        return i;
+      }
+    }
+    return null;
   }
 
-  // pop function
+  // pop method
   pop() {
-    // return top most element in the stack
-    // and removes it from the stack
-    // Underflow if stack is empty
-    if (this.items.length == 0) return "Underflow";
-    return this.items.pop();
+    this.objects.pop();
   }
 
-  // peek function
+  // push method
+  push(value) {
+    this.objects.push(value);
+  }
+
+  // peek method
   peek() {
-    // return the top most element from the stack
-    // but does'nt delete it.
-    return this.items[this.items.length - 1];
-  }
-
-  // isEmpty function
-  isEmpty() {
-    // return true if stack is empty
-    return this.items.length == 0;
-  }
-
-  // printStack function
-  printStack() {
-    var str = "";
-    for (var i = 0; i < this.items.length; i++) str += this.items[i] + " ";
-    return str;
+    return this.objects[this.objects.length - 1];
   }
 }
 
-let stack = new Stack();
-stack.push(78);
+const stack = new Stack();
+stack.push(1);
+stack.push(2);
 stack.pop();
-stack.push(44);
-stack.push(12);
-stack.push(18);
-stack.pop();
-stack.push(19);
-stack.pop();
-stack.pop();
-stack.push(12);
-stack.push(28);
-
-console.log(stack.printStack());
+console.log(stack.peek());
+console.log(stack.lookup(1));
+console.log(stack.objects);

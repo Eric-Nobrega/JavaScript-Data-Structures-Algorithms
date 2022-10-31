@@ -1,67 +1,49 @@
-// program to implement queue data structure
 class Queue {
+  // constructor method
   constructor() {
-    this.elements = {};
+    this.objects = [];
     this.head = 0;
     this.tail = 0;
   }
 
+  // isEmpty method
+  isEmpty() {
+    return this.objects.length == 0;
+  }
+
   // enqueue method
   enqueue(element) {
-    // sets the tail to be equal to the new element that is added to the queue
+    // add the new element on to the end of the objects array
+    // by accessing the tail index, which is the end node/element
     this.elements[this.tail] = element;
-    // increments the tail
+    // increment the tail value to be equal to the end node/element index
     this.tail++;
   }
 
   // dequeue method
   dequeue() {
-    // select the item at the front of the back
-    const item = this.elements[this.head];
-    // remove the item at the front of the queue
+    // remove the
     delete this.elements[this.head];
-    // increment the head value as it is moving up the queue's index
     this.head++;
-    // return the item that was removed from the front of the queue
-    return item;
   }
 
   // peek method
   peek() {
-    // select and return the element at the front of the queue (head)
+    // returning the element at index 0, as the element to first leave then
+    // queue is the index 0 element (FIFO Data Structure)
     return this.elements[this.head];
   }
 
-  // length method
-  get length() {
-    // return the length of the queue
-    return this.tail - this.head;
-  }
-
-  // empty method
-  get isEmpty() {
-    return this.length === 0;
+  // getLength method
+  getLength(){
+    return this.tail;
   }
 }
 
-// create an instance of a queue
-let q = new Queue();
+const queue = new Queue();
+queue.enqueue(5);
+console.log(queue.getLength());
 
-// enqueue elements from 1 - 7
-for (let i = 1; i <= 7; i++) {
-  q.enqueue(i);
-}
 
-// get the number at the front of the queue
-console.log(q.peek());
-
-// get the current length of the queue
-console.log(q.length);
-
-// remove the element at the front of the queue
-console.log(q.dequeue());
-
-// remove all the elements
-while (!q.isEmpty()) {
-  console.log(q.dequeue());
-}
+// tail = index 5
+// head = index 0

@@ -1,25 +1,14 @@
-//the first node in the linked list is the head node
-//the last node is the tail node, and points to a null
-//value
+/*the main benefit of a DLL vs LL is that the list can be 
+traversed backwards easily since each node points forward, 
+and backwards*/
 
-//a node is comprised of a data, and the position of
-//the next element
-
-// a pointer is a reference to another place in memory / a node / an object
-
-//const obj1 = { a: true };
-//const obj2 = obj1;
-
-// obj2 is a pointer to the first variable obj1
-
-// linked list implementation in javascript
-
-class LinkedList {
+class DoublyLinkedList {
   constructor(value) {
     // value is the starting node, aka the head node
     this.head = {
       value: value,
       next: null,
+      prev: null,
     };
     // tai by default is equal to the head as there is only one value
     this.tail = this.head;
@@ -35,8 +24,9 @@ class LinkedList {
     const newNode = {
       value: value,
       next: null,
+      prev: null,
     };
-
+    newNode.prev = this.tail;
     this.tail.next = newNode;
     this.tail = newNode;
 
@@ -116,39 +106,13 @@ class LinkedList {
     leaderNode.next = holdingPointer;
     this.length--;
   }
-
-  reverse() {
-    // Code Here
-    // Not just reverse the list
-    // Make the first node equal the tail and so on
-    // Each node must point to the next node until tail is null
-    // [1, 5, 16] -> [16, 5, 1]
-
-    // check if the list is 1 long or empty
-    if (!this.head.next) {
-      return this.head;
-    }
-
-    let first = this.head;
-    let second = first.next;
-    while (second) {
-      const temp = second.next;
-      second.next = first;
-      first = second;
-      second = temp;
-    }
-    this.head.next = null;
-    this.head = first;
-    return this.traverse();
-  }
 }
 // linked list = [10, 5, 16]
-let myLinkedList = new LinkedList(10);
-myLinkedList.append(5);
-myLinkedList.append(16);
-myLinkedList.prepend(1);
+let DoublyLinkedList = new DoublyLinkedList(10);
+DoublyLinkedList.append(5);
+DoublyLinkedList.append(16);
+DoublyLinkedList.prepend(1);
 // linked list = [1, 10, 5, 16]
-myLinkedList.remove(1);
+DoublyLinkedList.remove(1);
 // linked list = [1, 5, 16]
-myLinkedList.traverse();
-myLinkedList.reverse();
+DoublyLinkedList.traverse();
